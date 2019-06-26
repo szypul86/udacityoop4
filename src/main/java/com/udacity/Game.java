@@ -149,16 +149,20 @@ public class Game {
      * @return String indicating the outcome of the game: "X wins" or "O wins" or "Tie" or "None"
      */
     public String checkGameWinner(char [][]grid){
-        String result = "None";
+
         /*Student code goes here ...
-        tie result will only apear if no free grid cells will be available,
-        yet we have to check if the last vell marked gave a win to either of sides.
-         */
-        if (freeSpots == 0) {
-            result = "tie";
+        tie result as a default value
+        */
+        String result = "Tie";
+        // iterate through whole grid checking if any cell is empty - if so change result to "None"
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j <3; j++) {
+                if (grid [i][j] == '-'){
+                    result = "None";
+                }
+            }
+
         }
-        //need at least 5 marked grid cells to have a chance for win, so why bother with earlier checks
-        if (freeSpots < 5) {
             // iteration through rows and colums check if same char
             for (int i = 0; i < 3; i++) {
                 if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != '-') {
@@ -175,7 +179,7 @@ public class Game {
             if (grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0] && grid[1][1] != '-') {
                 result = grid[1][1] + " wins";
             }
-        }
+
         return result;
     }
 
